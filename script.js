@@ -4,21 +4,23 @@ const output = document.querySelector("#secondinput");
 const operations = document.querySelector("#operator");
 
 let operation = "";
+let inputText = "";
 
-const getValue = () => {
-  operation = operations.options[operations.selectedIndex].text;
+const getOption = () => {
+  operation = operations.options[operations.selectedIndex].value;
 };
 
-const modifyString = (value) => {
-  switch (value) {
+const modifyString = (option, value) => {
+  console.log(option, value);
+  switch (option) {
     case "1":
-      return (result += operationNumber);
+      return value.slice(0, 1).toUpperCase() + value.slice(1).toLowerCase();
     case "2":
-      return (result -= operationNumber);
+      return value.split(" ")[0];
     case "3":
-      return (result *= operationNumber);
+      return value.split(" ")[0].length;
     case "4":
-      return (result /= operationNumber);
+      return;
     case "5":
       return (result += operationNumber);
     case "6":
@@ -33,8 +35,17 @@ const modifyString = (value) => {
   }
 };
 
+const takeAction = () => {
+  getOption();
+  inputText = input.value;
+  console.log(input);
+  const formatedText = modifyString(operation, inputText);
+  console.log(formatedText);
+  output.value = formatedText;
+};
+
 const start = () => {
-  getResult.addEventListener("click", checkBox);
+  getResult.addEventListener("click", takeAction);
 };
 
 document.addEventListener("DOMContentLoaded", start);
